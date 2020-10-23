@@ -1652,17 +1652,7 @@ pre code {
   background-color: rgba(255, 255, 255, 0.075);
 }
 
-@media (max-width: 575.98px) {
-  .table-responsive-sm {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .table-responsive-sm > .table-bordered {
-    border: 0;
-  }
-}
+
 
 @media (max-width: 767.98px) {
   .table-responsive-md {
@@ -2164,6 +2154,9 @@ textarea.form-control {
 }
 
 @media (min-width: 576px) {
+  .hidden-sm-up{
+    display: none !important;
+  }
   .form-inline label {
     display: flex;
     align-items: center;
@@ -10555,7 +10548,7 @@ a:focus {
   align-items: center;
   overflow: hidden;
   width: 100%;
-  height: 100px;
+  height: 50px;
   padding: 20px 0px;
 }
 
@@ -10586,8 +10579,9 @@ a:focus {
 .card-container .card .card-content {
   padding: 20px;
   padding-top: 0px;
-  height: 120px;
-  font-size: 17px;
+  height: 100px;
+  font-size: 12px;
+  word-break: break-word;
 }
 
 .card-container .card .card-content > h2 {
@@ -10596,7 +10590,7 @@ a:focus {
 }
 
 .card-container .card .card-footer {
-  padding: 10px;
+  padding: 5px;
   color: #ffffff;
 }
 
@@ -10623,6 +10617,10 @@ a:focus {
 
 .card-container .card-games .card-count, .card-container .card-games .card-footer {
   background-image: linear-gradient(90deg, #bbc66f, #66a905);
+}
+
+.card-container .card-utilities .card-count, .card-container .card-utilities .card-footer {
+  background-image: linear-gradient(90deg, #7b7b7b, #002048);
 }
 
 .card-container .card-pictures .card-count, .card-container .card-books .card-footer {
@@ -11053,7 +11051,7 @@ footer.sticky-footer .copyright {
   font-size: 0.8rem;
 }
 
-body.sidebar-toggled footer.sticky-footer {
+body.sidebar-toggled footer.sticky-footer, .register-container textarea {
   width: 100%;
 }
 
@@ -11063,6 +11061,10 @@ body.sidebar-toggled footer.sticky-footer {
 
 .pl-30 {
   padding-left: 30px;
+}
+
+.pl-10 {
+  padding-left: 10px;
 }
 
 .width-100 {
@@ -11182,8 +11184,70 @@ a.nav-link div.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListIt
   padding-bottom: 0px !important;
 }
 
-vertical-padding-0 {
+.vertical-padding-0 {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+
+.card-footer .MuiSvgIcon-root {
+  font-size: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.register-header-container {
+  font-size: 30px;
+}
+
+.btn-register-pg {
+  font-size: 20px
+}
+
+@media (max-width: 575.98px) {
+  .table-responsive-sm {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-responsive-sm > .table-bordered {
+    border: 0;
+  }
+  .hidden-xs-dn{
+    display: none;
+  }
+  .center-xs-dn{
+    text-align: center;
+  }
+  .banner-text {
+    font-weight: inherit !important;
+    font-size: 20px;
+    padding-top: 15px;
+  }
+  .card-parent-conatiner{
+    padding-top: 30px;
+  }
+  .App-content-6{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .register-container div.MuiGrid-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .button-grid button{
+    margin-left: 5px;
+    margin-top: 15px;
+  }
+
+  .btn-register-pg {
+    font-size: 10px !important;
+  }
+
+  .register-container {
+    padding-top: 35px;
+  }
 }
 /* SKYNET END */

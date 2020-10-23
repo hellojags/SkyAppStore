@@ -6,9 +6,10 @@ import CasinoOutlinedIcon from '@material-ui/icons/CasinoOutlined';
 import SportsEsportsOutlinedIcon from '@material-ui/icons/SportsEsportsOutlined';
 import MenuBookTwoToneIcon from '@material-ui/icons/MenuBookTwoTone';
 import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
+import BusinessCenterOutlinedIcon from '@material-ui/icons/BusinessCenterOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 
-export const CATEGORIES = ['all','video', 'audio', 'blog', 'games', 'books', 'pictures', 'skynetportal', 'other'];
+export const CATEGORIES = ['all','video', 'audio', 'blog', 'games', 'books', 'pictures', 'skynetportal', 'utilities', 'other'];
 
 export const RENDER_CATEGORY_LOGO = (category)=>{
     if (category==='all'){
@@ -30,8 +31,11 @@ export const RENDER_CATEGORY_LOGO = (category)=>{
       return <CameraAltOutlinedIcon />
     } else if(category.toLowerCase()==='skynetportal'){
       return <LanguageOutlinedIcon />
+    } else if (category.toLowerCase()==='utilities'){
+      return <BusinessCenterOutlinedIcon />
     }
   }
 
 export const WEBSERVICE_SUCCESS='success';
 export const WEBSERVICE_FAILURE='failure';
+export const APP_TITLE="SKYNET APPSTORE";

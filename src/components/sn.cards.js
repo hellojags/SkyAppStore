@@ -26,8 +26,8 @@ function renderPageHeading(category) {
     case "audio":
       return "Audio";
       break;
-    case "app":
-      return "Web Apps";
+    case "utilities":
+      return "Utilities";
       break;
     case "games":
       return "Games";
@@ -37,6 +37,15 @@ function renderPageHeading(category) {
       break;
     case "blog":
       return "Blogs";
+      break;
+    case "pictures":
+      return "Pictures";
+      break;  
+    case "skynetportal":
+      return "Skynet Portal";
+      break; 
+    case "other":
+      return "Other Apps"
       break;
     default:
       return "All Apps";
@@ -61,15 +70,34 @@ class SnCards extends React.Component {
     this.handleSrchKeyChng = this.handleSrchKeyChng.bind(this);
     this.launchSkyLink = this.launchSkyLink.bind(this);
     this.getFilteredApps = this.getFilteredApps.bind(this);
+    this.trimDescription = this.trimDescription.bind(this);
+  }
+
+  trimDescription(strValue, maxLength){
+    if (strValue && strValue.length>maxLength){
+      return strValue.slice(0,maxLength-3) + '...';
+    } else {
+      return strValue;
+    }
   }
 
   launchSkyLink(skyLink) {
-    window.open(skyLink, "_blank");
+    let link = "";
+    if (skyLink.indexOf("http://")=== 0 || skyLink.indexOf("https://")=== 0){
+      link = skyLink;
+    } else if (skyLink.indexOf("sia://") === 0){
+      link = skyLink.replace("sia://", "https://skynethub.io/")
+    } else if (skyLink.lenghth === 46){
+      link = "https://skynethub.io/"+skyLink;
+    }
+    if (link!== "") {
+      window.open(link, "_blank")
+    } 
   }
 
   handleSrchSbmt(evt) {
     evt.preventDefault();
-    console.log("search form submitted");
+    //console.log("search form submitted");
   }
 
   handleSrchKeyChng(evt) {
@@ -103,7 +131,7 @@ class SnCards extends React.Component {
   }
 
   getAppList() {
-    fetch("https://skynethub-api.herokuapp.com/skapps")
+    fetch("https://skynethub-api.herokuapp.com/skapps?limit=500")
       .then(res => res.json())
       .then(res => (res.hasOwnProperty("status") ? res.result : res))
       .then(
@@ -185,16 +213,10 @@ class SnCards extends React.Component {
       console.log(filteredApps)
       return (
         <div className="card-parent-conatiner">
-          <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            <button
-              id="sidebarToggleTop"
-              className="btn btn-link d-md-none rounded-circle mr-3"
-            >
-              <i className="fa fa-bars"></i>
-            </button>
+          <nav className="navbar navbar-expand navbar-light bg-white topbar mb-1 static-top shadow">
 
             <form
-              className="d-none d-sm-inline-block form-inline mr-md-5 ml-md-5 my-2 my-md-0 mw-100 navbar-search"
+              className="d-sm-inline-block form-inline mr-md-5 ml-md-5 my-2 my-md-0 mw-100 navbar-search"
               onSubmit={this.handleSrchSbmt}
             >
               <div className="input-group">
@@ -212,7 +234,6 @@ class SnCards extends React.Component {
                       id="filled-secondary"
                       label="Search Skynet Apps"
                       name="searchKey"
-                      variant="filled"
                       className="width-100"
                       onChange={this.handleSrchKeyChng}
                     />
@@ -220,60 +241,22 @@ class SnCards extends React.Component {
                 </Grid>
               </div>
             </form>
-
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item dropdown no-arrow d-sm-none">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="searchDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="fas fa-search fa-fw"></i>
-                </a>
-
-                <div
-                  className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                  aria-labelledby="searchDropdown"
-                >
-                  <form className="form-inline mr-auto w-100 navbar-search">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0 small"
-                        placeholder="Search the SKY..."
-                        aria-label="Search"
-                        aria-describedby="basic-addon2"
-                      />
-                      <div className="input-group-append">
-                        <button className="btn btn-primary" type="button">
-                          <i className="fas fa-search fa-sm"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </li>
-            </ul>
           </nav>
           <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between">
               <Grid container spacing={1}>
-                <Grid item xs={8}>
+                <Grid item xs={6} sm={8}>
                   <div className="d-sm-flex align-items-center justify-content-between">
-                    <h3>
+                    <h5>
                       {renderPageHeading(category)}
-                    </h3>
+                    </h5>
                   </div>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} sm={4}>
                   <div className="d-sm-flex align-items-center justify-content-between float-right">
-                    <h4>
+                    <h6>
                      Total Count : {filteredApps.length}
-                    </h4>
+                    </h6>
                   </div>
                 </Grid>
               </Grid>
@@ -290,13 +273,15 @@ class SnCards extends React.Component {
                         className={"card card-" + app.category.toLowerCase()}
                       >
                         <div className="card-count-container">
-                          <h4 className="pl-30"> {app.title} </h4>
+                          <h5 className="pl-10"> {app.title} </h5>
                           {/* <div className="card-count">
                     {RENDER_CATEGORY_LOGO(app.category)}
                   </div> */}
                         </div>
 
-                        <div className="card-content ">{app.description}</div>
+                        <div className="card-content ">
+                          {this.trimDescription(app.description, 200)}
+                        </div>
 
                         <div className="card-footer">
                           {RENDER_CATEGORY_LOGO(app.category)} 
@@ -308,9 +293,7 @@ class SnCards extends React.Component {
                             <OpenInNewIcon
                               className="float-right cursor-pointer margin-right-20"
                               onClick={() => {
-                                this.launchSkyLink(
-                                  "https://siasky.net/" + app.skylink
-                                );
+                                this.launchSkyLink(app.skylink);
                               }}
                             />
                           )}
