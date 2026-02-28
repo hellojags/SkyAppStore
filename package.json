@@ -23,7 +23,7 @@
     "react-hook-form": "^4.10.1",
     "react-material-ui-form-validator": "^2.0.10",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
+    "react-scripts": "5.0.1",
     "reactstrap": "^8.4.1"
   },
   "scripts": {
